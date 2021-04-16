@@ -11,20 +11,30 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 import django_heroku
+import os
+import environ
+from pathlib import Path
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
 
+# <django-assets>
+# See https://devcenter.heroku.com/articles/django-assets
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-from pathlib import Path
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.9/howto/static-files/
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+# </django-assets>
 
+# <django-environ>
 # See https://django-environ.readthedocs.io/en/latest/
-
-import environ
-
 env = environ.Env(
     # set casting, default value
     DEBUG=(bool, False)
@@ -37,10 +47,10 @@ DEBUG = env('DEBUG')
 
 # Raises django's ImproperlyConfigured exception if SECRET_KEY not in os.environ
 SECRET_KEY = env('SECRET_KEY')
+# </django-environ>
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
-
 
 ALLOWED_HOSTS = []
 
@@ -131,7 +141,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
