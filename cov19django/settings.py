@@ -7,6 +7,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
+# Version based on https://github.com/heroku/python-getting-started/blob/main/gettingstarted/settings.py
+
 import os
 import django_heroku
 import environ
