@@ -1,8 +1,7 @@
 from django.urls import include, path
 from rest_framework import routers
 
-from cov19api.views.authviews import TestAuthView
-from cov19api.views.publicviews import AuthToken, TestPublicView, RegionViewSet
+from cov19api.views import AuthToken, TestPublicView, RegionViewSet, TestAuthView
 
 router = routers.DefaultRouter()
 router.register(r'regions', RegionViewSet)

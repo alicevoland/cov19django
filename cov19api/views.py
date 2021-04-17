@@ -1,14 +1,12 @@
-from django.shortcuts import render
-
+from django.http import JsonResponse
 # Create your views here.
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet, ViewSet
 
 from cov19api.serializers import *
-from cov19api.models import *
 
 
 class AuthToken(ObtainAuthToken):
@@ -32,8 +30,24 @@ class RegionViewSet(ModelViewSet):
 
 
 class TestPublicView(ViewSet):
+    """DOc"""
+
     def list(self, request):
+        """DDD"""
         return Response({
             'view': 'TestPublicView',
             'authenticated': request.user.is_authenticated
         })
+
+
+class TestAuthView(ViewSet):
+    permission_classes = [IsAuthenticated]
+
+    def list(self, request):
+        '''Doc'''
+        return Response(
+            data={
+                'view': 'TestAuthView',
+                'authenticated': request.user.is_authenticated
+            }
+        )
