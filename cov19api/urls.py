@@ -7,7 +7,7 @@ from cov19api.views.publicviews import AuthToken, TestPublicView, RegionViewSet
 router = routers.DefaultRouter()
 router.register(r'regions', RegionViewSet)
 router.register(r'test', TestPublicView, 'test')
-router.register(r'auth/test', TestAuthView, 'test')
+router.register(r'auth/test', TestAuthView, 'auth-test')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
