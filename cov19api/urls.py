@@ -1,17 +1,17 @@
 from django.urls import include, path
 from rest_framework import routers
 
-from cov19api.views import AuthToken, TestPublicView, RegionViewSet, TestAuthView
+from cov19api import views
 
 router = routers.DefaultRouter()
-router.register(r'regions', RegionViewSet)
-router.register(r'test', TestPublicView, 'test')
-router.register(r'auth/test', TestAuthView, 'auth-test')
+router.register(r'regions', views.RegionViewSet)
+router.register(r'departments', views.DepartmentViewSet)
+router.register(r'testUpdate', views.TestUpdateViewSet, 'update')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('api-token-auth/', AuthToken.as_view()),
+    path('api-token-auth/', views.AuthToken.as_view()),
 ]

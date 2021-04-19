@@ -1,6 +1,8 @@
 from django.contrib import admin
-from .models import *
+
+from cov19api import models
 
 # Register your models here.
 
-admin.site.register(Region)
+admin.site.register(models.Region)
+admin.site.register(models.Department)
